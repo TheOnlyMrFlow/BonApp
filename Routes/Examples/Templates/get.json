@@ -1,0 +1,74 @@
+{
+    
+    "id": 2,
+
+    "locked": true,
+
+    "name": "2020",
+
+    "semestres": [
+        {
+            "name": "Semestre 1",
+            "composantes":
+            {
+                "id": 23456,
+                "name": "Competenes generales IT",
+                "coefficient": 3,
+                "familles": [
+                    {
+                        "name": "Agir en bon communiquant",
+                        "competences": 
+                        [
+                            {
+                                "id": 124,
+                                "name": "Communiquer a l'oral",
+                                "description": "Il faut savoir communiquer, it's that simple my negro",
+                                "coefficient": 4
+                                
+                            },
+                            {
+                                "id": 125,
+                                "name": "Nourrir ses camarades",
+                                "description": "C'est important de manger",
+                                "coefficient": 3
+                                
+                            }
+                        ]
+                    },
+                    {
+                        "name": null,
+                        "competences": [
+                            {
+                                "id": 126,
+                                "name": "Coder en JS",
+                                "description": "Parceque c'est cool",
+                                "coefficient": 3
+                                
+                            }
+                        ]
+                    }
+            
+                ]
+            }
+            
+        },
+        {
+            "name": "Semestre 2",
+            "composantes": []
+        }
+    ],
+
+    "niveaux": [
+        {
+            "index": 0,
+            "Name": "Non acquis",
+            "valeur": 0
+        },
+        {
+            "index": 1,
+            "name": "Acquis",
+            "valeur": 3
+        }
+    ]
+
+}

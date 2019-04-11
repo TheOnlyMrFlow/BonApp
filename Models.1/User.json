@@ -1,0 +1,26 @@
+{
+    "id": 9323,
+    "prenom": "Jean-Pierre",
+    "nom": "Perneaud",
+    "type": "tuteur",
+    "login": "jpperneaud",
+    "mail": "jpperneaud@yolo.com",
+    "pw": "$32efw23rb32jfk234uyt2b3jrn2utyh4ft"    ,
+
+    "equipe_favs_ids": [234, 231, 572]
+}
+
+{
+    "id": 9451,
+    "prenom": "Florian",
+    "nom": "Comte",
+    "type": "eleve",
+    "login": "fcomte",
+    "mail": "florian.comte@yolo.com",
+
+    "pw": "$32efw23rb32jfk234uyt2b3jrn2utyh4ft",
+
+    "equipe_id"  : 234,
+    "genre": "m"
+
+}

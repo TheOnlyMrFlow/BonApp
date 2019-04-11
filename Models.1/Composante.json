@@ -1,0 +1,16 @@
+{
+    "id": 23456,
+    "name": "Competenes generales IT",
+    "coefficient": 3,
+    "familles": [
+        {
+            "name": "Agir en bon communiquant",
+            "competences_id": [123, 223, 214]
+        },
+        {
+            "name": null,
+            "competences": []
+        }
+
+    ]
+}

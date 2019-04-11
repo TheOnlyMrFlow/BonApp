@@ -1,0 +1,33 @@
+{
+    
+    "id": 34,
+
+    "locked": true,
+
+    "name": "2020",
+
+    "semestres": [
+        {
+            "name": "Semestre 1",
+            "composantes_id": [123, 234, 2345]
+            
+        },
+        {
+            "name": "Semestre 2"
+        }
+    ],
+
+    "niveaux": [
+        {
+            "index": 0,
+            "Name": "Non acquis",
+            "valeur": 0
+        },
+        {
+            "index": 1,
+            "name": "Acquis",
+            "valeur": 3
+        }
+    ]
+
+}

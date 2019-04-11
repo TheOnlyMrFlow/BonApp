@@ -1,0 +1,38 @@
+
+
+
+
+/templates (get) -> fetch les templates (admin)
+
+    /:id (get) -> fetch un template
+    /:id (post) -> creer un template
+    /:id (delete) -> delete un template
+    /:id (patch) -> edit nom du template
+
+        /semestres
+
+            /:id (get) -> fetch un semestre du template 
+            /:id (post) -> creer un semestre dans le template
+            /:id (delete) -> deleet un semestre d'un template
+            /:id (patch) -> edit le nom du semestre
+
+        /composantes
+
+            /:id (get) -> fetch une composante du template
+            /:id (post) -> creer une composante dans un semestre
+            /:id (delete) -> delete une composante d'un template
+            /:id (patch) -> edit le nom de la composante
+
+        /niveaux (get) -> fetch les niveaux du template
+        /niveaux (post) -> creer un niveau
+
+            /:index (get) -> get le niveau a cet index
+            /:index (delete) -> delete un niveau
+            /:index (patch) -> 
+
+
+            
+        
+    /new (post) -> creer un template
+    
+    

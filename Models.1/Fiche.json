@@ -1,0 +1,27 @@
+{
+    "id": 23,
+    "Notations": [
+        {
+            "id_competence": 124,
+            "index_niveau": [
+                {
+                    "date": "01-23-1998",
+                    "index_niveau": 1
+                },
+                {
+                    "date": "02-22-1998",
+                    "index_niveau": 2
+                }
+
+            ],
+            "obs_groupe": "wallah ce groupe il dechire",
+            "obs_ind": [
+                {
+                    "id_eleve": 9451,
+                    "obs": "Cet eleve n'est pas tres bon"
+                }
+            ]
+        }
+    ]
+
+}
