@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const bodyParser = require('body-parser');
+
 const morgan = require('morgan');
 
 const cors = require("cors");
@@ -24,6 +26,9 @@ db.once('open', function() {
 // 'mongodb://mrflow:' + process.env.MONGO_ATLAS_PASSWORD + '@cluster0-4iqxv.mongodb.net/test?retryWrites=true'
 
 const routes = require('./Routes/routes');
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 app.use(morgan('dev'));

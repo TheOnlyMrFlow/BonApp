@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-
-router.get('/', (req, res, next) => {
-    res.status(200).json({"Coucou" : 2});
-});
+const templateControllers = require('../../Controllers/templates');
 
 
-router.post('/', (req, res, next) => {
+router.get('/', templateControllers.getAllTemplates);
 
-});
+
+router.post('/', templateControllers.postNewTemplate);
 
 module.exports = router;
