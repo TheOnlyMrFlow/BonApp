@@ -1,8 +1,14 @@
 const http = require('http');
 const app = require('./app');
 
-const port = 8080;
+const config = require('./config');
+
+// const dotenv = require('dotenv');
+// dotenv.config();
+
+
+
 
 const server = http.createServer(app);
 
-server.listen(port);
+server.listen(config.port || 8080);

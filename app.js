@@ -5,13 +5,23 @@ const morgan = require('morgan');
 
 const cors = require("cors");
 
+const config = require('./config');
+
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://mrflow:' + config.mongo_pwd + '@cluster0-4iqxv.mongodb.net/test?retryWrites=true',  {useNewUrlParser: true});
 
-'mongodb://MrFlow:' + process.env.MONGO_ATLAS_PASSWORD + '@code-shirts-shard-00-00-s2vos.mongodb.net:27017,code-shirts-shard-00-01-s2vos.mongodb.net:27017,code-shirts-shard-00-02-s2vos.mongodb.net:27017/test?ssl=true&replicaSet=code-shirts-shard-0&authSource=admin'
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
+
+//mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+
+// 'mongodb://MrFlow:' + process.env.MONGO_ATLAS_PASSWORD + '@code-shirts-shard-00-00-s2vos.mongodb.net:27017,code-shirts-shard-00-01-s2vos.mongodb.net:27017,code-shirts-shard-00-02-s2vos.mongodb.net:27017/test?ssl=true&replicaSet=code-shirts-shard-0&authSource=admin'
 
 
-'mongodb://mrflow:' + process.env.MONGO_ATLAS_PASSWORD + '@cluster0-4iqxv.mongodb.net/test?retryWrites=true'
+// 'mongodb://mrflow:' + process.env.MONGO_ATLAS_PASSWORD + '@cluster0-4iqxv.mongodb.net/test?retryWrites=true'
 
 const routes = require('./Routes/routes');
 
