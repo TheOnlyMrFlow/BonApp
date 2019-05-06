@@ -14,7 +14,7 @@ exports.getAllSemestres = (req, res, next) => {
     .populate('semestres')
     .exec()
     .then(doc => {
-        res.status(200).json(doc);
+        res.status(200).json(doc.semestres);
     })
     .catch(err => {
         console.log(err);
