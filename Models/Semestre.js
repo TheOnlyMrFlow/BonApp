@@ -7,4 +7,4 @@ const semestreSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Semestre', semestreSchema);
+module.exports = mongoose.model('Semestre', semestreSchema, 'semestre');

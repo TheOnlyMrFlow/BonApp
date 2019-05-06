@@ -11,9 +11,10 @@ exports.getAllSemestres = (req, res, next) => {
     
 
     Template.findOne({_id: req.params.templateId})
+    .populate('semestres')
     .exec()
     .then(doc => {
-        res.status(200).json(doc.semestres);
+        res.status(200).json(doc);
     })
     .catch(err => {
         console.log(err);
@@ -45,6 +46,15 @@ exports.postNewSemestre = (req, res, next) => {
 
     const semestre = new Semestre({
         nom: req.body.nom
+    })
+
+    semestre.save()
+    .then(result => {
+
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
     })
 
     Template.update(
