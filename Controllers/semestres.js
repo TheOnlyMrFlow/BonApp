@@ -10,10 +10,10 @@ exports.getAllSemestres = (req, res, next) => {
     console.log(req.params);
     
 
-    Template.find({_id: req.params.templateId})
+    Template.findOne({_id: req.params.templateId})
     .exec()
-    .then(docs => {
-        res.status(200).json(docs.semestres);
+    .then(doc => {
+        res.status(200).json(doc.semestres);
     })
     .catch(err => {
         console.log(err);
