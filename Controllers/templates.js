@@ -18,6 +18,21 @@ exports.getAllTemplates = (req, res, next) => {
     
 }
 
+exports.getTemplateById = (req, res, next) => {
+
+
+    Template.find({_id: req.params._id})
+    .exec()
+    .then(docs => {
+        res.status(200).json(docs[0]);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+    
+}
+
 exports.postNewTemplate = (req, res, next) => {
 
 
@@ -31,13 +46,30 @@ exports.postNewTemplate = (req, res, next) => {
 
     template.save() 
     .then(result => {
-        res.status(201).json({
-            message: "Template created"
-        })
+        console.log(result);
+        
+        res.status(201).json(template)    
     })
     .catch(err => {
         console.log(err);
         res.status(500).json({error:err});
     });
+
+}
+
+exports.deleteTemplateById = (req, res, next) => {
+
+    console.log(req.params);
+    
+
+    Template.findByIdAndDelete(req.params._id)
+    .exec()
+    .then(result => {
+        res.status(204).json({});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    })
 
 }

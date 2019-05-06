@@ -1,5 +1,22 @@
 
 
+/templates (get) => fetch tous les templates
+/templates/:_id (get) => fetch un template par son id
+/templates (post) => cree un template
+/templates/:_id (delete) => delete un template par son id
+
+/templates/:_id/semestres (get) => fetch tous les semestres d'un template
+/templates/semestres/:_id (get) => fetch un semestre par son id
+/templates/:_id/semestres (post) => cree un semestre dans le template specifie
+/templates/semestres/:_id (delete) => delete un semestre par son id
+
+/templates/semestres/:_id/composantes (get) => fetch toutes les composantes d'un semestre
+/templates/semestres/composantes/:_id (get) => fetch une composante par son id
+/templates/semestres/:_id/composantes (post) => cree une composante dans le semestre specifie
+/templates/semestres/composantes/:_id (delete) => delete une composante par son id
+
+
+
 
 
 /templates (get) -> fetch les templates (admin)
