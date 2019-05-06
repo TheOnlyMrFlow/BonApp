@@ -19,9 +19,9 @@ exports.getAllTemplates = (req, res, next) => {
 }
 
 exports.getTemplateById = (req, res, next) => {
+    
 
-
-    Template.find({_id: req.params._id})
+    Template.find({_id: req.params.templateId})
     .exec()
     .then(docs => {
         res.status(200).json(docs[0]);
@@ -62,7 +62,7 @@ exports.deleteTemplateById = (req, res, next) => {
     console.log(req.params);
     
 
-    Template.findByIdAndDelete(req.params._id)
+    Template.findByIdAndDelete(req.params.templateId)
     .exec()
     .then(result => {
         res.status(204).json({});

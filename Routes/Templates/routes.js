@@ -1,15 +1,20 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(({ mergeParams: true }));
+
+const semestresRoutes = require('./Semestres/routes');
+
 
 const templateControllers = require('../../Controllers/templates');
 
 
 router.get('/', templateControllers.getAllTemplates);
 
-router.get('/:_id', templateControllers.getTemplateById);
+router.get('/:templateId', templateControllers.getTemplateById);
 
 router.post('/', templateControllers.postNewTemplate);
 
-router.delete('/:_id', templateControllers.deleteTemplateById);
+router.delete('/:templateId', templateControllers.deleteTemplateById);
+
+router.use('/:templateId/semestres', semestresRoutes);
 
 module.exports = router;
