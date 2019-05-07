@@ -74,19 +74,49 @@ exports.postNewSemestre = (req, res, next) => {
 
 }
 
-// exports.deleteTemplateById = (req, res, next) => {
+exports.renameSemestre = (req, res, next) => {
 
-//     console.log(req.params);
-    
+    Template.findOne({_id: req.params.templateId})
+    .exec()
+    .then(doc => {
 
-//     Template.findByIdAndDelete(req.params._id)
-//     .exec()
-//     .then(result => {
-//         res.status(204).json({});
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json({error: err});
-//     })
+        if (!doc.semestres.contains(req.params.semestreId)) {
+            throw {"error": "Ce template ne continent pas de semestre avec cet id"}
+        }
 
-// }
+        Semestre.findByIdAndUpdate(
+            req.params.semestreId,
+            { $set: { nom: req.body.nom } }
+        )
+        .exec()
+        .then(result => {
+            res.status(204).json({"nom": req.body.nom});
+
+        })
+        
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+
+}
+
+exports.deleteSemestreById = (req, res, next) => {    
+
+    Semestre.findByIdAndDelete(req.params.semestreId)
+    .exec()
+    .then(result => {
+        // Template.update(
+        //     { _id: req.params.templateId},
+        //     { $pull: { _id: req.params.semestreId } }
+        // )
+        // .exec()
+        res.status(204).json({});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    })
+
+}
