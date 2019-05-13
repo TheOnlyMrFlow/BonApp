@@ -96,7 +96,7 @@ exports.deleteNiveauById = (req, res, next) => {
     .then(result => {
         Template.update(
             { _id: req.params.templateId},
-            { $pull: { _id: req.params.niveauId } }
+            { $pull: { niveaux: { _id: req.params.niveauId } } }
         )
         .exec()
         res.status(204).json({});
