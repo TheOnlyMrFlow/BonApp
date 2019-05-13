@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router(({ mergeParams: true }));
 
 const semestresRoutes = require('./Semestres/routes');
+const composantesRoutes = require('./Composantes/routes');
 const niveauxRoutes = require('./Niveaux/routes');
 
 
@@ -19,5 +20,6 @@ router.delete('/:templateId', templateControllers.deleteTemplateById);
 
 router.use('/:templateId/semestres', semestresRoutes);
 router.use('/:templateId/niveaux', niveauxRoutes);
+router.use('/:templateId/composantes', composantesRoutes);
 
 module.exports = router;

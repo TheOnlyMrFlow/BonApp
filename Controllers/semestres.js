@@ -11,7 +11,12 @@ exports.getAllSemestres = (req, res, next) => {
     
 
     Template.findOne({_id: req.params.templateId})
-    .populate('semestres')
+    .populate({
+        path: 'semestres',
+        populate: { path: 'composantes' }
+    })
+    // .populate('semestres')
+    // .populate('composantes')
     .exec()
     .then(doc => {
         res.status(200).json(doc.semestres);

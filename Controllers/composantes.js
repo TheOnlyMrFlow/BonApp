@@ -1,5 +1,6 @@
 const Composante = require('../Models/Composante');
 const Semestre = require('../Models/Semestre');
+const Template = require('../Models/Template');
 const mongoose = require('mongoose');
 
 
@@ -13,6 +14,36 @@ exports.getComposantesOfSemestre = (req, res, next) => {
     .then(doc => {
         
         res.status(200).json(doc.composantes);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+
+}
+
+exports.getComposantesOfTemplate = (req, res, next) => {
+
+
+    let composantes = [];
+
+    Template.findOne({_id: req.params.templateId})
+    .exec()
+    .then(doc1 => {
+        let j = 0;
+        for (var i = 0, len = doc1.semestres.length; i < len; i++) {
+            Semestre.findOne({_id: doc1.semestres[i]})
+            .populate('composantes')
+            .exec()
+            .then(doc => {
+                j++;
+                composantes.push(doc);
+                if (j == len) {
+
+                    res.status(200).json(composantes);
+                }
+            })
+          }
     })
     .catch(err => {
         console.log(err);
