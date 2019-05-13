@@ -93,7 +93,8 @@ exports.renameSemestre = (req, res, next) => {
         )
         .exec()
         .then(result => {
-            res.status(204).json({nom: req.body.nom});
+            
+            res.status(200).json({nom: req.body.nom});
 
         })
         
