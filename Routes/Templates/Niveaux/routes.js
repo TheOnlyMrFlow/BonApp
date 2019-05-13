@@ -5,7 +5,7 @@ const router = express.Router(({ mergeParams: true }));
 const niveauxControllers = require('../../../Controllers/niveaux');
 
 
-router.get('/', niveauxControllers.getNiveauxOfSemestre);
-router.post('/', niveauxControllers.postNiveauInSemestre);
+router.get('/', niveauxControllers.getNiveauxOfTemplate);
+router.post('/', niveauxControllers.postNiveauInTemplate);
 
 module.exports = router;

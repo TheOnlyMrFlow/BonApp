@@ -4,12 +4,13 @@ const mongoose = require('mongoose');
 
 
 
-exports.getNiveauxOfSemestre = (req, res, next) => {
+exports.getNiveauxOfTemplate = (req, res, next) => {
 
 
 
     Template.findOne({_id: req.params.templateId})
-    .populate('niveau')
+    //.populate('niveaux')
+    .populate('niveaux')
     .exec()
     .then(doc => {
         res.status(200).json(doc.niveaux);
@@ -21,7 +22,7 @@ exports.getNiveauxOfSemestre = (req, res, next) => {
 
 }
 
-exports.postNiveauInSemestre = (req, res, next) => {
+exports.postNiveauInTemplate = (req, res, next) => {
 
 
     // console.log(req.params);
