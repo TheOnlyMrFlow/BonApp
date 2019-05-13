@@ -22,35 +22,38 @@ exports.getComposantesOfSemestre = (req, res, next) => {
 
 }
 
-exports.getComposantesOfTemplate = (req, res, next) => {
+// exports.getComposantesOfTemplate = (req, res, next) => {
 
 
-    let composantes = [];
+//     let composantes = [];
 
-    Template.findOne({_id: req.params.templateId})
-    .exec()
-    .then(doc1 => {
-        let j = 0;
-        for (var i = 0, len = doc1.semestres.length; i < len; i++) {
-            Semestre.findOne({_id: doc1.semestres[i]})
-            .populate('composantes')
-            .exec()
-            .then(doc => {
-                j++;
-                composantes.push(doc);
-                if (j == len) {
+//     Template.findOne({_id: req.params.templateId})
+//     .exec()
+//     .then(doc1 => {
+//         let j = 0;
+//         for (var i = 0, len = doc1.semestres.length; i < len; i++) {
+//             Semestre.findOne({_id: doc1.semestres[i]})
+//             .populate('composantes')
+//             .exec()
+//             .then(doc => {
 
-                    res.status(200).json(composantes);
-                }
-            })
-          }
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({error:err});
-    });
+//                 doc['semestre'] = 
+//                 j++;
+//                 composantes.push(doc);
+//                 if (j == len) {
 
-}
+//                     res.status(200).json(composantes);
+//                 }
+//             })
+//           }
+//     })
+//     .catch(err => {
+//         consol
+e.log(err);
+//         res.status(500).json({error:err});
+//     });
+
+// }
 
 exports.postComposanteInSemestre = (req, res, next) => {
 
