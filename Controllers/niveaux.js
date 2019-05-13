@@ -91,19 +91,19 @@ exports.patchNiveau = (req, res, next) => {
 
 exports.deleteNiveauById = (req, res, next) => {
 
-    // Semestre.findByIdAndDelete(req.params.semestreId)
-    // .exec()
-    // .then(result => {
-    //     // Template.update(
-    //     //     { _id: req.params.templateId},
-    //     //     { $pull: { _id: req.params.semestreId } }
-    //     // )
-    //     // .exec()
-    //     res.status(204).json({});
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json({error: err});
-    // })
+    Niveau.findByIdAndDelete(req.params.niveauId)
+    .exec()
+    .then(result => {
+        Template.update(
+            { _id: req.params.templateId},
+            { $pull: { _id: req.params.niveauId } }
+        )
+        .exec()
+        res.status(204).json({});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    })
 
 }
