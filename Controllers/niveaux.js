@@ -57,33 +57,35 @@ exports.postNiveauInTemplate = (req, res, next) => {
 
 exports.patchNiveau = (req, res, next) => {
 
-    // Template.findOne({_id: req.params.templateId})
-    // .exec()
-    // .then(doc => {
 
-    //     // console.log(doc.semestres);
-    //     // console.log('' + req.params.semestreId)
 
-    //     // if (!doc.semestres.indexOf('' + req.params.semestreId) > -1) {
-    //     //     throw {"error": "Ce template ne continent pas de semestre avec cet id"}
-    //     // }
+    Template.findOne({_id: req.params.templateId})
+    .exec()
+    .then(doc => {
 
-    //     Semestre.findOneAndUpdate(
-    //         {_id: req.params.semestreId},
-    //         { $set: { nom: req.body.nom } }
-    //     )
-    //     .exec()
-    //     .then(result => {
+        // console.log(doc.semestres);
+        // console.log('' + req.params.semestreId)
 
-    //         res.status(200).json({nom: req.body.nom});
+        // if (!doc.semestres.indexOf('' + req.params.semestreId) > -1) {
+        //     throw {"error": "Ce template ne continent pas de semestre avec cet id"}
+        // }
 
-    //     })
+        Niveau.findOneAndUpdate(
+            {_id: req.params.niveauId},
+            { $set: { nom: req.body.nom, note: req.body.note } }
+        )
+        .exec()
+        .then(result => {
 
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json({error:err});
-    // });
+            res.status(200).json({nom: req.body.nom, note: req.body.note});
+
+        })
+
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
 
 }
 
