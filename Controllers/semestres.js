@@ -80,17 +80,20 @@ exports.renameSemestre = (req, res, next) => {
     .exec()
     .then(doc => {
 
-        if (!doc.semestres.contains(req.params.semestreId)) {
-            throw {"error": "Ce template ne continent pas de semestre avec cet id"}
-        }
+        // console.log(doc.semestres);
+        // console.log('' + req.params.semestreId)
 
-        Semestre.findByIdAndUpdate(
-            req.params.semestreId,
+        // if (!doc.semestres.indexOf('' + req.params.semestreId) > -1) {
+        //     throw {"error": "Ce template ne continent pas de semestre avec cet id"}
+        // }
+
+        Semestre.findOneAndUpdate(
+            {_id: req.params.semestreId},
             { $set: { nom: req.body.nom } }
         )
         .exec()
         .then(result => {
-            res.status(204).json({"nom": req.body.nom});
+            res.status(204).json({nom: req.body.nom});
 
         })
         

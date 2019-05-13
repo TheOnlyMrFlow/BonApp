@@ -12,7 +12,7 @@ router.get('/', semestreControllers.getAllSemestres);
 
 router.post('/', semestreControllers.postNewSemestre);
 
-router.patch('/', semestreControllers.renameSemestre)
+router.patch('/:semestreId', semestreControllers.renameSemestre)
 
 router.delete('/:semestreId', semestreControllers.deleteSemestreById);
 
