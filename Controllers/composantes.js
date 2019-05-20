@@ -84,22 +84,18 @@ exports.patchComposante = (req, res, next) => {
         .exec()
         .then(resUpdateComp => {
 
-            console.log("Update comp : " + resUpdateComp)
-
             Semestre.findOneAndUpdate(
-                {_id: idNewSemestre},
-                {$addToSet: {composantes: idComposante}}
+                {_id: idOldSemestre},
+                {$pull: {composantes: idComposante}}
             )
             .exec()
-            .then(resUpdateNewSemestre => {
-                console.log("Update new semestre : " + resUpdateNewSemestre)
+            .then(resUpdateOldSemestre => {
                 Semestre.findOneAndUpdate(
-                    {_id: idOldSemestre},
-                    {$pull: {composantes: idComposante}}
+                    {_id: idNewSemestre},
+                    {$addToSet: {composantes: idComposante}}
                 )
                 .exec()
-                .then(resUpdateOldSemestre => {
-                    console.log("Update old semestre : " + resUpdateOldSemestre)
+                .then(resUpdateNewSemestre => {
                     res.status(200).json({nom: req.body.nom, coefficient: req.body.coefficient});
                 })
             })
