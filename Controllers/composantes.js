@@ -22,38 +22,6 @@ exports.getComposantesOfSemestre = (req, res, next) => {
 
 }
 
-// exports.getComposantesOfTemplate = (req, res, next) => {
-
-
-//     let composantes = [];
-
-//     Template.findOne({_id: req.params.templateId})
-//     .exec()
-//     .then(doc1 => {
-//         let j = 0;
-//         for (var i = 0, len = doc1.semestres.length; i < len; i++) {
-//             Semestre.findOne({_id: doc1.semestres[i]})
-//             .populate('composantes')
-//             .exec()
-//             .then(doc => {
-
-//                 doc['semestre'] = 
-//                 j++;
-//                 composantes.push(doc);
-//                 if (j == len) {
-
-//                     res.status(200).json(composantes);
-//                 }
-//             })
-//           }
-//     })
-//     .catch(err => {
-//         consol
-e.log(err);
-//         res.status(500).json({error:err});
-//     });
-
-// }
 
 exports.postComposanteInSemestre = (req, res, next) => {
 
@@ -91,11 +59,16 @@ exports.postComposanteInSemestre = (req, res, next) => {
 
 exports.patchComposante = (req, res, next) => {
 
+    let idOldSemestre = req.params.semestreId
+    let idNewSemestre = req.body.semestre
+    let idComposante = req.params.composanteId
+    console.log(idOldSemestre)
+    console.log(idNewSemestre)
+    console.log(idComposante)
 
-
-    Semestre.findOne({_id: req.params.semestreId})
+    Semestre.findOne({_id: idOldSemestre})
     .exec()
-    .then(doc => {
+    .then(docSemestre => {
 
         // console.log(doc.semestres);
         // console.log('' + req.params.semestreId)
@@ -105,13 +78,34 @@ exports.patchComposante = (req, res, next) => {
         // }
 
         Composante.findOneAndUpdate(
-            {_id: req.params.composanteId},
+            {_id: idComposante},
             { $set: { nom: req.body.nom, coefficient: req.body.coefficient } }
         )
         .exec()
-        .then(result => {
+        .then(resUpdateComp => {
 
-            res.status(200).json({nom: req.body.nom, coefficient: req.body.coefficient});
+            console.log("Update comp : " + resUpdateComp)
+
+            Semestre.findOneAndUpdate(
+                {_id: idNewSemestre},
+                {$addToSet: {composantes: idComposante}}
+            )
+            .exec()
+            .then(resUpdateNewSemestre => {
+                console.log("Update new semestre : " + resUpdateNewSemestre)
+                Semestre.findOneAndUpdate(
+                    {_id: idOldSemestre},
+                    {$pull: {composantes: idComposante}}
+                )
+                .exec()
+                .then(resUpdateOldSemestre => {
+                    console.log("Update old semestre : " + resUpdateOldSemestre)
+                    res.status(200).json({nom: req.body.nom, coefficient: req.body.coefficient});
+                })
+            })
+
+
+            
 
         })
 
