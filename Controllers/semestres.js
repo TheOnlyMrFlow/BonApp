@@ -13,7 +13,12 @@ exports.getAllSemestres = (req, res, next) => {
     Template.findOne({_id: req.params.templateId})
     .populate({
         path: 'semestres',
-        populate: { path: 'composantes' }
+        populate: { 
+            path: 'composantes' ,
+            populate: {
+                    path: 'familles'
+            }
+        }
     })
     // .populate('semestres')
     // .populate('composantes')

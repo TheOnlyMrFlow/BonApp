@@ -1,7 +1,7 @@
 const Composante = require('../Models/Composante');
 const Semestre = require('../Models/Semestre');
-const Template = require('../Models/Template');
-const mongoose = require('mongoose');
+const Famille = require('../Models/Famille');
+
 
 
 
@@ -9,7 +9,12 @@ exports.getComposantesOfSemestre = (req, res, next) => {
 
 
     Semestre.findOne({_id: req.params.semestreId})
-    .populate('composantes')
+    .populate({
+        path: 'composantes',
+        populate: { path: 'familles' }
+    })
+    // .populate('composantes')
+    // .populate('familles')
     .exec()
     .then(doc => {
         
@@ -50,8 +55,6 @@ exports.postComposanteInSemestre = (req, res, next) => {
         .catch(err => {
             res.status(500).json({ error: err });
         })
-
-
     
 
 
@@ -62,20 +65,53 @@ exports.patchComposante = (req, res, next) => {
     let idOldSemestre = req.params.semestreId
     let idNewSemestre = req.body.semestre
     let idComposante = req.params.composanteId
-    console.log(idOldSemestre)
-    console.log(idNewSemestre)
-    console.log(idComposante)
 
     Semestre.findOne({_id: idOldSemestre})
     .exec()
     .then(docSemestre => {
 
-        // console.log(doc.semestres);
-        // console.log('' + req.params.semestreId)
-
-        // if (!doc.semestres.indexOf('' + req.params.semestreId) > -1) {
-        //     throw {"error": "Ce template ne continent pas de semestre avec cet id"}
+        // for (let i = 0; i < docSemestre.composantes.length; i++) {
+        //     if (idComposante == docSemestre.composantes[i].toString()) {
+        //         throw "Le semestre specifie dans la route ne contient pas la composante a cet id"
+        //     }
         // }
+
+        Composante.findOne({
+            _id: idComposante
+        })
+        .populate('familles')
+        .exec()
+        .then(docComposante => {
+            if (req.body.familles != undefined) {
+                let newFamilles = req.body.familles
+                let lengthNewFamille = newFamilles.length
+                for (let i = 0; i < lengthNewFamille; i++) {
+                    let exists = false
+                    for (let j = 0; j < docComposante.familles.length; j++) {
+                        console.log(docComposante.familles[j].nom + " vs " + newFamilles[i])
+                        if (docComposante.familles[j].nom == newFamilles[i]) {
+                            exists = true;
+                        }
+                    }
+
+                    console.log(exists)
+
+                    if (!exists) {
+                        const f = new Famille({
+                            nom: newFamilles[i]
+                        })
+                        f.save()
+                        .then(famille=> {
+                            Composante.findOneAndUpdate(
+                                {_id: idComposante},
+                                {$addToSet: {familles: famille}}
+                            ).exec()
+                        })
+                    }
+                }
+            }
+
+        })
 
         Composante.findOneAndUpdate(
             {_id: idComposante},
