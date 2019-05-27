@@ -6,6 +6,8 @@ const famillesControllers = require('../../../../../Controllers/familles')
 
 router.get('/', famillesControllers.getFamillesOfComposante)
 
+router.post('/', famillesControllers.postNewFamille)
+
 //router.get('/', composantesControllers.getComposantesOfSemestre);
 
 

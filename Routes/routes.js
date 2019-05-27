@@ -10,5 +10,4 @@ router.use('/templates', templatesRoutes);
 router.use('/promotions', promotionsRoutes);
 
 
-
 module.exports = router;

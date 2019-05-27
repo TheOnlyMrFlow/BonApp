@@ -13,5 +13,36 @@ const Famille = require('../Models/Famille');
         res.status(200).json(docComposante.familles)
     })
 
+}
 
- }
+exports.postNewFamille = (req, res, next) => {    
+
+    const famille = new Famille({
+        nom: req.body.nom
+    })
+
+    famille.save()
+    .then(result => {
+
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    })
+
+    Composante.update(
+        { _id: req.params.composanteId},
+        { $push: { familles: famille } }
+    )
+    .exec()
+    .then(result => {
+        console.log(result);
+        
+        res.status(201).json(result)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
+
+}
