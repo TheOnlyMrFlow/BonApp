@@ -39,9 +39,9 @@ app.use(cors());
 
 app.use(routes);
 
-app.use('/', (req, res, next) => {    
-    res.status(200).json({});
-});
+// app.use('/', (req, res, next) => {    
+//     res.status(200).json({});
+// });
 
 app.use((req, res, next) =>{
     const error = new Error('Not found');
