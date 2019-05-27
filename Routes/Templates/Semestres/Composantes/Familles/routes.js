@@ -8,6 +8,8 @@ router.get('/', famillesControllers.getFamillesOfComposante)
 
 router.post('/', famillesControllers.postNewFamille)
 
+router.delete('/', famillesControllers.deleteFamilleById);
+
 //router.get('/', composantesControllers.getComposantesOfSemestre);
 
 

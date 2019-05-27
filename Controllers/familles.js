@@ -46,3 +46,24 @@ exports.postNewFamille = (req, res, next) => {
     });
 
 }
+
+
+
+exports.deleteFamilleById = (req, res, next) => {    
+
+    Famille.findByIdAndDelete(req.params.familleId)
+    .exec()
+    .then(result => {
+        // Template.update(
+        //     { _id: req.params.templateId},
+        //     { $pull: { _id: req.params.semestreId } }
+        // )
+        // .exec()
+        res.status(204).json({});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    })
+
+}
