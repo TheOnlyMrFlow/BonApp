@@ -3,12 +3,15 @@ const router = express.Router(({ mergeParams: true }));
 
 const famillesControllers = require('../../../../../Controllers/familles')
 
+const competencesRoutes = require('./Competences/routes')
+
+router.use('/:familleId/competences', competencesRoutes)
 
 router.get('/', famillesControllers.getFamillesOfComposante)
 
 router.post('/', famillesControllers.postNewFamille)
 
-router.delete('/', famillesControllers.deleteFamilleById);
+router.delete('/:familleId', famillesControllers.deleteFamilleById);
 
 //router.get('/', composantesControllers.getComposantesOfSemestre);
 
