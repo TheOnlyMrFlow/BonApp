@@ -38,7 +38,7 @@ exports.postNewFamille = (req, res, next) => {
     .then(result => {
         console.log(result);
         
-        res.status(201).json(result)
+        res.status(201).json(famille)
     })
     .catch(err => {
         console.log(err);
