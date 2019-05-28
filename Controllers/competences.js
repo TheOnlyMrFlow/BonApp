@@ -55,3 +55,17 @@ exports.postNewCompetence = (req, res, next) => {
 }
 
 
+exports.patchCompetence = (req, res, next) => {
+
+    Competence.findOneAndUpdate(
+        {_id: req.params.competenceId},
+        {$set : {nom: req.body.nom, description: req.body.description, coefficient: req.body.coefficient}},
+        {new: true}
+    )
+    .exec()
+    .then(docNewCompetence => {
+        res.status(200).json(docNewCompetence);
+    })
+
+}
+

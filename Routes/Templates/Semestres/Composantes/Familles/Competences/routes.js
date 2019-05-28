@@ -8,6 +8,8 @@ router.get('/', competencesControllers.getCompetencesOfFamille);
 
 router.post('/', competencesControllers.postNewCompetence);
 
+router.patch('/:competenceId', competencesControllers.patchCompetence)
+
 
 
 module.exports = router;
