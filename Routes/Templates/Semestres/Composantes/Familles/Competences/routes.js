@@ -10,6 +10,8 @@ router.post('/', competencesControllers.postNewCompetence);
 
 router.patch('/:competenceId', competencesControllers.patchCompetence)
 
+router.delete('/:competenceId', competencesControllers.deleteCompetence)
+
 
 
 module.exports = router;

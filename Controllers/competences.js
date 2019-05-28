@@ -69,3 +69,19 @@ exports.patchCompetence = (req, res, next) => {
 
 }
 
+
+exports.deleteCompetence = (req, res, next) => {
+
+    Competence.findByIdAndDelete({_id: req.params.competenceId})
+    .exec()
+    .then(result => {
+        res.status(204).json({msg: "Competence delete"})
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    })
+
+
+}
+
