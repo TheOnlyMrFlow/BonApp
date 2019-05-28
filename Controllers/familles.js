@@ -7,7 +7,15 @@ const Famille = require('../Models/Famille');
     console.log('ewrtju')
 
     Composante.findOne({_id: req.params.composanteId})
-    .populate('familles')
+    //.populate('familles')
+
+    .populate({
+        path: 'familles',
+        populate: { 
+            path: 'competences'
+        }
+    })
+    
     .exec()
     .then(docComposante => {
         res.status(200).json(docComposante.familles)
