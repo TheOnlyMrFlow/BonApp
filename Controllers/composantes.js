@@ -5,6 +5,16 @@ const Famille = require('../Models/Famille');
 
 
 
+exports.getComposanteNameById = (req, res, next) => {
+
+    Composante.findOne({_id:req.params.composanteId})
+    .exec()
+    .then(doc => {
+        res.status(200).json({nom: doc.nom})
+    })
+
+}
+
 exports.getComposantesOfSemestre = (req, res, next) => {
 
 

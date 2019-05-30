@@ -4,6 +4,16 @@ const mongoose = require('mongoose');
 
 
 
+exports.getPromotionNameById = (req, res, next) => {
+
+    Promotion.findOne({_id:req.params.promotionId})
+    .exec()
+    .then(doc => {
+        res.status(200).json({nom: doc.nom})
+    })
+
+}
+
 exports.getAllPromotions = (req, res, next) => {
     
 
@@ -77,19 +87,19 @@ exports.renamePromotion = (req, res, next) => {
 
 exports.deletePromotion = (req, res, next) => {    
 
-    Semestre.findByIdAndDelete(req.params.semestreId)
-    .exec()
-    .then(result => {
-        // Template.update(
-        //     { _id: req.params.templateId},
-        //     { $pull: { _id: req.params.semestreId } }
-        // )
-        // .exec()
-        res.status(204).json({});
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({error: err});
-    })
+    // Semestre.findByIdAndDelete(req.params.semestreId)
+    // .exec()
+    // .then(result => {
+    //     // Template.update(
+    //     //     { _id: req.params.templateId},
+    //     //     { $pull: { _id: req.params.semestreId } }
+    //     // )
+    //     // .exec()
+    //     res.status(204).json({});
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    //     res.status(500).json({error: err});
+    // })
 
 }

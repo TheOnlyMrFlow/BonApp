@@ -11,6 +11,7 @@ router.use('/:composanteId/familles', famillesRoutes);
 
 
 router.get('/', composantesControllers.getComposantesOfSemestre);
+router.get('/:composanteId', composantesControllers.getComposanteNameById);
 router.post('/', composantesControllers.postComposanteInSemestre);
 router.patch('/:composanteId', composantesControllers.patchComposante);
 router.delete('/:composanteId', composantesControllers.deleteComposanteById);
