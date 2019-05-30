@@ -51,9 +51,7 @@ exports.postNewEquipe = (req, res, next) => {
                     }
                     res.status(201).json(equipe)
                 }
-            )
-            
-            
+            )            
         })
         .catch(err => {
             next(err)
@@ -64,10 +62,9 @@ exports.postNewEquipe = (req, res, next) => {
         console.log(err);
         res.status(500).json({error:err});
     })
-
-    
-
 }
+
+
 exports.renameEquipe = (req, res, next) => {
 
     Groupe.findOne({_id: req.params.groupeId})
