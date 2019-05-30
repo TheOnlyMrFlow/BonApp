@@ -1,4 +1,5 @@
 const Promotion = require('../Models/Promotion');
+const Groupe = require('../Models/Groupe');
 const mongoose = require('mongoose');
 
 
@@ -9,15 +10,12 @@ exports.getAllPromotions = (req, res, next) => {
     Promotion.find()
     // .populate('semestres')
     // .populate('composantes')
+    .populate('template')
+    .populate('groupes')
     .exec()
     .then(docs => {
 
-        res.status(200).json(docs.map(prom => {
-            return {
-                "nom": prom.nom,
-                "_id": prom._id
-            }
-        }));
+        res.status(200).json(docs);
     })
     .catch(err => {
         console.log(err);
@@ -39,10 +37,7 @@ exports.postNewPromotion = (req, res, next) => {
 
         console.log(result);
 
-        res.status(201).json({
-            nom: promotion.nom,
-            _id: promotion._id
-        })    
+        res.status(201).json(promotion)    
 
 
     })
@@ -53,30 +48,19 @@ exports.postNewPromotion = (req, res, next) => {
 
 }
 
-exports.renameSemestre = (req, res, next) => {
+exports.renamePromotion = (req, res, next) => {
 
-    Template.findOne({_id: req.params.templateId})
+
+    Promotion.findOneAndUpdate(
+        {_id: req.params.promotionId},
+        { $set: { nom: req.body.nom } },
+        {new: true}
+    )
     .exec()
-    .then(doc => {
-
-        // console.log(doc.semestres);
-        // console.log('' + req.params.semestreId)
-
-        // if (!doc.semestres.indexOf('' + req.params.semestreId) > -1) {
-        //     throw {"error": "Ce template ne continent pas de semestre avec cet id"}
-        // }
-
-        Semestre.findOneAndUpdate(
-            {_id: req.params.semestreId},
-            { $set: { nom: req.body.nom } }
-        )
-        .exec()
-        .then(result => {
-            
-            res.status(200).json({nom: req.body.nom});
-
-        })
+    .then(result => {
         
+        res.status(200).json(result);
+
     })
     .catch(err => {
         console.log(err);
@@ -85,21 +69,21 @@ exports.renameSemestre = (req, res, next) => {
 
 }
 
-exports.deleteSemestreById = (req, res, next) => {    
+exports.deletePromotion = (req, res, next) => {    
 
-    Semestre.findByIdAndDelete(req.params.semestreId)
-    .exec()
-    .then(result => {
-        // Template.update(
-        //     { _id: req.params.templateId},
-        //     { $pull: { _id: req.params.semestreId } }
-        // )
-        // .exec()
-        res.status(204).json({});
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({error: err});
-    })
+    // Semestre.findByIdAndDelete(req.params.semestreId)
+    // .exec()
+    // .then(result => {
+    //     // Template.update(
+    //     //     { _id: req.params.templateId},
+    //     //     { $pull: { _id: req.params.semestreId } }
+    //     // )
+    //     // .exec()
+    //     res.status(204).json({});
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    //     res.status(500).json({error: err});
+    // })
 
 }

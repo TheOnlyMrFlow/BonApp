@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const groupeSchema = mongoose.Schema({
-    //_id: mongoose.Schema.Types.ObjectId,
-    // nom: { type: String, required: true, unique: true},
-    // competences: {type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Competence',}], default: []}
-});
+
+    nom: { type: String, required: true, unique: true},
+    equipes: {type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Equipe',}], default: []}
+})
 
 module.exports = mongoose.model('Groupe', groupeSchema);

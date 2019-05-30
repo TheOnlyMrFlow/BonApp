@@ -8,5 +8,7 @@ router.get('/', promotionsControllers.getAllPromotions);
 
 router.post('/', promotionsControllers.postNewPromotion);
 
+router.patch('/:promotionId', promotionsControllers.renamePromotion);
+
 
 module.exports = router;
