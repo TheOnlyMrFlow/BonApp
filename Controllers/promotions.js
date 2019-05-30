@@ -29,7 +29,8 @@ exports.postNewPromotion = (req, res, next) => {
     
 
     const promotion = new Promotion({
-        nom: req.body.nom
+        nom: req.body.nom,
+        template: req.body.template
     })
 
     promotion.save()
@@ -37,7 +38,12 @@ exports.postNewPromotion = (req, res, next) => {
 
         console.log(result);
 
-        res.status(201).json(promotion)    
+        result.populate(
+            "template",
+            error => {
+                res.status(201).json(result)  
+            }  
+        )
 
 
     })
@@ -71,19 +77,19 @@ exports.renamePromotion = (req, res, next) => {
 
 exports.deletePromotion = (req, res, next) => {    
 
-    // Semestre.findByIdAndDelete(req.params.semestreId)
-    // .exec()
-    // .then(result => {
-    //     // Template.update(
-    //     //     { _id: req.params.templateId},
-    //     //     { $pull: { _id: req.params.semestreId } }
-    //     // )
-    //     // .exec()
-    //     res.status(204).json({});
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json({error: err});
-    // })
+    Semestre.findByIdAndDelete(req.params.semestreId)
+    .exec()
+    .then(result => {
+        // Template.update(
+        //     { _id: req.params.templateId},
+        //     { $pull: { _id: req.params.semestreId } }
+        // )
+        // .exec()
+        res.status(204).json({});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    })
 
 }

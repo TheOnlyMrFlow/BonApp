@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const promotionSchema = mongoose.Schema({
     //_id: mongoose.Schema.Types.ObjectId,
     nom: { type: String, required: true, unique: true},
-    template: {type: mongoose.Schema.Types.ObjectId, ref: 'Template'},
+    template: {type: mongoose.Schema.Types.ObjectId, ref: 'Template', required: true},
     groupes: {type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Groupe',}], default: []}
 });
 
