@@ -8,6 +8,8 @@ router.get('/', equipesControllers.getAllEquipes)
 
 router.post('/', equipesControllers.postNewEquipe)
 
+router.patch('/:equipeId', equipesControllers.renameEquipe);
+
 
 
 

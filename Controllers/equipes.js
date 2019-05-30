@@ -68,14 +68,14 @@ exports.postNewEquipe = (req, res, next) => {
     
 
 }
-exports.renameGroupe = (req, res, next) => {
+exports.renameEquipe = (req, res, next) => {
 
-    Promotion.findOne({_id: req.params.promotionId})
+    Groupe.findOne({_id: req.params.groupeId})
     .exec()
     .then(doc => {
 
-        Groupe.findOneAndUpdate(
-            {_id: req.params.groupeId},
+        Equipe.findOneAndUpdate(
+            {_id: req.params.equipeId},
             { $set: { nom: req.body.nom } },
             {new: true}
         )
