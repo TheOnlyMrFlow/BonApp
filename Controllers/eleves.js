@@ -66,7 +66,7 @@ exports.patchEleve = (req, res, next) => {
     .then(doc => {
 
         User.findOneAndUpdate(
-            {_id: req.params.code},
+            {code: req.params.code},
             { $set: { nom: req.body.nom, prenom: req.body.prenom, code: req.body.code, genre: req.body.genre } },
             {new: true}
         )
