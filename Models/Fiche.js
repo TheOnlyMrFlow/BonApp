@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const ficheSchema = mongoose.Schema({
     //_id: mongoose.Schema.Types.ObjectId,
-    nom: { type: String, required: true},
-    notations: { type: Number, required: true},
+    notations: { type: [{type: mongoose.Schema.Types.ObjectId, ref: "Notation"}], default: []},
     observation: {type: String, default: "Aucune observation"}
 
 });

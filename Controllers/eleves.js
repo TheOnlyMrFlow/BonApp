@@ -2,6 +2,8 @@ const Groupe = require('../Models/Groupe');
 const Promotion = require('../Models/Promotion');
 const Equipe = require('../Models/Equipe');
 const User = require('../Models/User');
+const Notation = require('../Models/Notation');
+const Template = require('../Models/Template');
 const mongoose = require('mongoose');
 
 
@@ -34,16 +36,45 @@ exports.postNewEleve = (req, res, next) => {
     })
 
     eleve.save()
-    .then(result => {
+    .then(resultEleve => {
 
-        Equipe.update(
+        Equipe.findOneAndUpdate(
             { _id: req.params.equipeId},
-            { $push: { eleves: eleve } }
+            { $push: { eleves: eleve } },
+            {new: true}
         )
         .exec()
-        .then(result => {
+        .then(docEquipe => {
 
-            console.log(result)
+            console.log(docEquipe)
+
+            Promotion.findOne({"groupes.equipes": docEquipe._id})
+            .exec()
+            .then(docPromo => {
+
+                Template.findOne({_id: docPromo.template})
+                .populate({
+                    path: 'semestres',
+                    populate: { 
+                        path: 'composantes',
+                        populate: { 
+                            path: 'competences'
+                        }
+                    }
+                })
+                .exec()
+                .then(docTemplate => {
+                    console.log(docTemplate)
+                })
+
+                const notation = new Notation({
+                    eleve: req.params.code,
+    
+                })
+                
+                
+                
+            })
             
             res.status(201).json(eleve)
                         
@@ -63,7 +94,7 @@ exports.patchEleve = (req, res, next) => {
 
     Equipe.findOne({_id: req.params.equipeId})
     .exec()
-    .then(doc => {
+    .then(docEquipe => {
 
         User.findOneAndUpdate(
             {code: req.params.code},
@@ -71,10 +102,9 @@ exports.patchEleve = (req, res, next) => {
             {new: true}
         )
         .exec()
-        .then(result => {
+        .then(docUser => {
+            res.status(200).json(docUser);
             
-            res.status(200).json(result);
-
         })
         
     })

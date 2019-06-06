@@ -4,6 +4,16 @@ const Equipe = require('../Models/Equipe');
 const mongoose = require('mongoose');
 
 
+exports.getEquipeNameById = (req, res, next) => {
+
+    Equipe.findOne({_id:req.params.equipeId})
+    .exec()
+    .then(doc => {
+        res.status(200).json({nom: doc.nom})
+    })
+
+}
+
 
 exports.getAllEquipes = (req, res, next) => {    
 

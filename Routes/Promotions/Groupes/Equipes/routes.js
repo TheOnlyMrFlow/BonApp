@@ -9,6 +9,8 @@ router.use('/:equipeId/eleves', elevesRoutes)
 
 router.get('/', equipesControllers.getAllEquipes)
 
+router.get('/:equipeId', equipesControllers.getEquipeNameById)
+
 router.post('/', equipesControllers.postNewEquipe)
 
 router.patch('/:equipeId', equipesControllers.renameEquipe)
