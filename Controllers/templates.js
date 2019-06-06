@@ -33,6 +33,26 @@ exports.getTemplateById = (req, res, next) => {
     
 }
 
+
+exports.renameTemplate = (req, res, next) => {
+
+    Template.findOneAndUpdate(
+        {_id: req.params.templateId},
+        { $set: { nom: req.body.nom } },
+        {new: true}
+    )
+    .exec()
+    .then(result => {
+        
+        res.status(200).json(result);
+
+    })
+    .catch(err => {
+        next(err)
+    });
+
+}
+
 exports.postNewTemplate = (req, res, next) => {
 
 

@@ -16,6 +16,8 @@ router.get('/:templateId', templateControllers.getTemplateById);
 
 router.post('/', templateControllers.postNewTemplate);
 
+router.patch('/:templateId', templateControllers.renameTemplate);
+
 router.delete('/:templateId', templateControllers.deleteTemplateById);
 
 router.use('/:templateId/semestres', semestresRoutes);
