@@ -7,6 +7,8 @@ router.get('/', elevesController.getAllEleves)
 
 router.post('/', elevesController.postNewEleve)
 
+router.patch('/:code', elevesController.patchEleve)
+
 router.delete('/:code', elevesController.deleteEleve)
 
 module.exports = router;

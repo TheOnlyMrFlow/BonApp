@@ -58,6 +58,32 @@ exports.postNewEleve = (req, res, next) => {
     })
 }
 
+
+exports.patchEleve = (req, res, next) => {
+
+    Equipe.findOne({_id: req.params.equipeId})
+    .exec()
+    .then(doc => {
+
+        User.findOneAndUpdate(
+            {_id: req.params.code},
+            { $set: { nom: req.body.nom, prenom: req.body.prenom, code: req.body.code, genre: req.body.genre } },
+            {new: true}
+        )
+        .exec()
+        .then(result => {
+            
+            res.status(200).json(result);
+
+        })
+        
+    })
+    .catch(err => {
+        next(err);
+    });
+
+}
+
 exports.deleteEleve = (req, res, next) => {
 
     User.findOneAndDelete({code: req.params.code})
