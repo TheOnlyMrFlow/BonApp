@@ -7,9 +7,32 @@ const mongoose = require('mongoose');
 exports.getPromotionNameById = (req, res, next) => {
 
     Promotion.findOne({_id:req.params.promotionId})
+    .populate({
+        path: 'template',
+        populate: { 
+            path: 'semestres',
+            populate: { 
+                path: 'composantes',
+                populate: { 
+                    path: 'familles',
+                    populate: { 
+                        path: 'competences'
+                    }
+                }
+            }
+        }
+    })
+    .populate({
+        path: 'template',
+        populate: {
+            path: 'niveaux'
+        }
+    })
     .exec()
     .then(doc => {
-        res.status(200).json({nom: doc.nom})
+        console.log(doc);
+        
+        res.status(200).json({nom: doc.nom, template: doc.template || null})
     })
 
 }

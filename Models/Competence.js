@@ -5,6 +5,7 @@ const competenceSchema = mongoose.Schema({
     nom: { type: String, required: true},
     description: {type: String, default: "Aucune description renseignee"},
     coefficient: { type: Number, required: true, default: 1},
+    observation: { type: String,  default: "Non renseignée"},
 });
 
 module.exports = mongoose.model('Competence', competenceSchema);

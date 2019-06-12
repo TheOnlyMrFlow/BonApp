@@ -59,7 +59,7 @@ exports.patchCompetence = (req, res, next) => {
 
     Competence.findOneAndUpdate(
         {_id: req.params.competenceId},
-        {$set : {nom: req.body.nom, description: req.body.description, coefficient: req.body.coefficient}},
+        {$set : {nom: req.body.nom, description: req.body.description, coefficient: req.body.coefficient, observation: req.body.observation}},
         {new: true}
     )
     .exec()
