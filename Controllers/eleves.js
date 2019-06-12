@@ -7,6 +7,50 @@ const Template = require('../Models/Template');
 const mongoose = require('mongoose');
 
 
+// promo populate et equipe populate\
+
+
+exports.getEleveById = (req, res, next) => {    
+
+    let result = {}
+    User.findOne({code: req.params.code})
+    .exec()
+    .then (docEleve => {
+        result = JSON.parse(JSON.stringify(docEleve))
+        Equipe.findOne({eleves: docEleve._id})
+        .populate('eleves')
+        .exec()
+        .then(docEquipe => {
+            result.equipe = docEquipe.nom;
+            Groupe.findOne({equipes: docEquipe._id})
+            .exec()
+            .then(docGroupe => {
+                Promotion.findOne({groupes: docGroupe._id})
+                .exec()
+                .then(docPromo => {
+                    result['promotion'] = docPromo ? docPromo._id : 'null'
+                    console.log(result)
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    next(err)
+                })
+            })
+            .catch(err => {
+                next(err)
+            })
+        })
+        .catch(err => {
+            next(err)
+        })
+    })
+    .catch(err => {
+        next(err)
+    })
+    
+}
+
+
 
 exports.getAllEleves = (req, res, next) => {    
 
